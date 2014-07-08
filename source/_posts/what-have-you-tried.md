@@ -13,4 +13,21 @@ tags: translation
 
 不卖关子了，这一通病是指大家解决问题的思路完全不对。让我举个例子，下面是的内容摘自某论坛：
 
-> 
+> 1)  Can we establish http connection in application.
+	  if so, i need that code.
+	  I checked NSURLconnection. I cannot intergrate that code.
+
+
+> 2)  I want to display a image from the website
+	  Can anybody please provide me the code?
+	  If anybody having sample program please give me.
+
+如上，问题在哪呢？对于第一语言不是英语的人来说，词法啦表达之类的有错都情有可原，但这不是重点，表达上的缺陷不怎么影响你去理解他想要问什么。
+
+问题在于这些人问问题的方式是寻求答案，想要现成的能工作的代码，而不是说想要找出解决问题的方法，完成这个任务的思路等。
+
+有趣的是上面的例子还不是最糟糕的情况，因为从该男子的描述“I checked NSURLconnection”来看，至少他还自己尝试了的。并且这个尝试的方向是对了的，因为在Cocoa里NSURLConnection确实是建立连接相关的一个类。但似乎这位朋友的努力也就仅仅是“checked”而以，因为“cannot intergrate that code”而止步了。
+
+浅尝辄止这一情况是很常见的。似乎大多数开发者在遇到问题时的首选解决方式就是到社区或者找人要一个现成的代码。这些人的目的同其他人一样，就是可以快速让代码工作然后发布了上线了。这目的是可以理解的，谁不想早点完成工作呢。
+
+但问题是，这类人不愿意（我没有用‘不能’，是因为只要你认真对待去研究了，世上少有事情是真正困难的）通过自己的努力，使用自己的自学能力去解决一些问题，到达目标。
