@@ -1,18 +1,18 @@
 # Hexo Configuration
-## Docs: http://hexo.io/docs/configuration.html
+## Docs: http://zespia.tw/hexo/docs/configuration.html
 ## Source: https://github.com/tommy351/hexo/
 
 # Site
 title: 刘哇勇的部落格
-subtitle: for a better web
-description: 一个存放碎碎念的地方
+subtitle:
+description:
 author: wayou liu
 email: liuwayong@gmail.com
-language: zh-CN
+language:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://wayou.github.io
+url: http://wyaou.github.io
 root: /
 permalink: :year/:month/:day/:title/
 tag_dir: tags
@@ -35,7 +35,6 @@ multi_thread: true
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
-relative_link: false
 highlight:
   enable: true
   line_number: true
@@ -58,8 +57,7 @@ tag: 2
 ## Hexo uses Connect as a server
 ## You can customize the logger format as defined in
 ## http://www.senchalabs.org/connect/logger.html
-port: 4000
-server_ip: 0.0.0.0
+port: 80
 logger: false
 logger_format:
 
@@ -76,7 +74,7 @@ per_page: 10
 pagination_dir: page
 
 # Disqus
-disqus_shortname: wayou
+disqus_shortname:
 
 # Extensions
 ## Plugins: https://github.com/tommy351/hexo/wiki/Plugins
@@ -84,8 +82,19 @@ disqus_shortname: wayou
 theme: landscape
 exclude_generator:
 
+# Markdown
+## https://github.com/chjj/marked
+markdown:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: true
+  smartLists: true
+  smartypants: true
+
 # Deployment
-## Docs: http://hexo.io/docs/deployment.html
+## Docs: http://zespia.tw/hexo/docs/deployment.html
 deploy:
   type: github
   repo: https://github.com/wayou/wayou.github.io.git
