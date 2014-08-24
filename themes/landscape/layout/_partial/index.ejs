@@ -1,13 +1,7 @@
 <% if (pagination == 2){ %>
-  <article class="archive-article archive-type-<%= page.layout %>">
-      <div class="archive-article-inner">
-        <header class="archive-article-header">
-          <% page.posts.each(function(post){ %>
-            <%- partial('archive-post', {post: post, index: true}) %>
-          <% }) %>
-        </header>
-      </div>
-    </article>
+  <% page.posts.each(function(post){ %>
+    <%- partial('article', {post: post, index: true}) %>
+  <% }) %>
   <% if (page.total > 1){ %>
     <nav id="page-nav">
       <%- paginator({
