@@ -1,6 +1,8 @@
 <% if (post.link){ %>
   <h1 itemprop="name" style="display:inline-block">
-    <a class="archive-article-title" href="<%- url_for(post.link) %>" target="_blank" itemprop="url"><%= post.title %></a>
+    <a class="archive-article-title" href="<%- url_for(post.link) %>" target="_blank" itemprop="url">
+    <%- partial('post/category') %>
+    <%= post.title %></a>
   </h1>
 <% } else if (post.title){ %>
   <% if (index){ %>
@@ -9,7 +11,8 @@
     </h1>
   <% } else { %>
     <h1 class="archive-article-title" itemprop="name" style="display:inline-block">
-      <%= post.title %>
+      <%- partial('post/category') %>
+      <%= post.categories[0] %><%= post.title %>
     </h1>
   <% } %>
 <% } %>
