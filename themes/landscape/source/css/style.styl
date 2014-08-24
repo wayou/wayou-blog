@@ -21,6 +21,14 @@ input, button
        url(font-icon-path + ".woff?v=#" + font-icon-version) format("woff"),
        url(font-icon-path + ".ttf?v=#" + font-icon-version) format("truetype"),
        url(font-icon-path + ".svg#fontawesomeregular?v=#" + font-icon-version) format("svg")
+       
+::selection
+  color: #fff
+  background-color: color-selection
+
+::-moz-selection
+  color: #fff
+  background-color: color-selection
 
 html, body, #container
   height: 100%
