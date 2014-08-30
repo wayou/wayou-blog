@@ -1,6 +1,6 @@
 <% if (pagination == 2){ %>
   <article class="archive-article archive-type-<%= page.layout %>">
-      <div class="archive-article-inner">
+      <div class="archive-article-inner archive-wrapper">
         <header class="archive-article-header">
           <% page.posts.each(function(post){ %>
             <%- partial('archive-post', {post: post, index: true}) %>
