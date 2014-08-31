@@ -38,11 +38,6 @@ Scala跟Java的冲锋枪没差，唯一的不同是他的使用说明是用你�
 JavaScript是把没有手柄的双刃剑，不多说。
 
 
-![奇葩双刃剑JS](2apco7plivhetq_small.png)
-
-JavaScript是把没有手柄的双刃剑，不多说。
-
-
 ![短枪手Go](2apco7plivhetq_small.png)
 
 Go 就自制的拥有`if err != nil` 检查特性的短枪，每次射完你都要执行一次以确定是不是射成功了，并且它只射Tab不射空格。
