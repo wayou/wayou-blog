@@ -63,6 +63,9 @@ step5. 替换图标
 
 完了`Icon`文件夹下多了我们自己的icon文件，现在把原来的图标删除，右击`103[English (Australia)]` 选择`Remove from project`。
 
+![删除原来的图标](remove.png)
+
+
 最后点击`File->Save`。
 
 step final. 替换exe
