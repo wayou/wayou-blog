@@ -36,11 +36,19 @@ console.info('楼上药不能停！');
 console.warn('楼上嘴太贱！');
 console.error('楼上关你毛事？');
 ```
+
 >console.log filter pic goes here
+
+
 
 如果再配合`console.group` 与`console.groupEnd`，可以将这种分类管理的思想发挥到极致。这适合于在开发一个规模很大模块很多很复杂的Web APP时，将各自的log信息分组到以各自命名空间为名称的组里面。
 ```js
-//xpl goes here
+console.group("app.foo");
+console.log("来自foo模块的信息 blah blah blah...");
+console.groupEnd();
+console.group("app.bar");
+console.log("来自foo模块的信息 blah blah blah...");
+console.groupEnd();
 ```
 >pic goes here
 
@@ -62,6 +70,7 @@ console.log('%chello world', 'background-image:-webkit-gradient( linear, left to
 ```
 >output goes here
 
+
 各种招大招的节奏啊~
 
 看着上面密集的代码不用惊慌，上面`console.log()`第二个参数全是纯CSS用来控制样式的，你不会陌生。而第一个参数里可以带用百分号开头的转义指令，如上面输出带样式的文字时使用的`%c`指令。更详细的指令参见官方API文档的[这个表格](https://developer.chrome.com/devtools/docs/console-api#consolelogobject-object)。
@@ -75,15 +84,17 @@ console.log("%c", "padding:50px 300px;line-height:120px;background:url('http://d
 ```
 >output goes here
 
+
 看着上面摇摆的豆比兔是不是有种抽它一脸的冲动。
 
 除此，`console.table` 更是直接以表格的形式将数据输出，不能赞得太多！
-借用之前写过的一篇博文里的例子：
+借用之前写过的[一篇博文](http://www.cnblogs.com/Wayou/p/things_you_dont_know_about_frontend.html)里的例子：
 ```js
 var data = [{'品名': '杜雷斯', '数量': 4}, {'品名': '冈本', '数量': 3}];
 console.table(data);
 ```
 >pic goes here
+
 
 
 另外，`console.log()` 接收不定参数，参数间用逗号分隔，最终会输出会将它们以空白字符连接。
@@ -99,16 +110,27 @@ cosole.assert
 ---
 当你想代码满足某些条件时才输出信息到控制台，那么你大可不必写`if`或者三元表达式来达到目的，`cosole.assert`便是这样场景下一种很好的工具，它会先对传入的表达式进行断言，只有表达式为假时才输出相应信息到控制台。
 ```js
-//xpl goes here
+var isDebug=false;
+console.assert(isDebug,'开发中的log信息。。。');
 ```
+>pic goes here
+
+
 
 console.count
 ---
 除了条件输出的场景，还有常见的场景是计数。
 当你想统计某段代码执行了多少次时也大可不必自己去写相关逻辑，内置的`console.count`可以很地胜任这样的任务。
 ```js
-//xpl goes here
+function foo(){
+	//其他函数逻辑blah blah。。。
+	console.count('foo 被执行的次数：');
+}
+foo();
+foo();
+foo();
 ```
+> pic goes here
 
 
 console.dir
@@ -116,23 +138,45 @@ console.dir
 将DOM结点以JavaScript对象的形式输出到控制台
 而`console.log`是直接将该DOM结点以DOM树的结构进行输出，与在元素审查时看到的结构是一致的。不同的展现形式，同样的优雅，各种体位任君选择反正就是方便与体贴。
 
+```js
+console.dir(document.body);
+console.log(document.body);
+```
+>pic goes here
 
 
-console.time
+
+console.time & console.timeEnd
 ---
 输出一些调试信息是控制台最常用的功能，当然，它的功能远不止于此。当做一些性能测试时，同样可以在这里很方便地进行。
 比如需要考量一段代码执行的耗时情况时，可以用`console.time`与 `console.timeEnd`来做此事。
 
+这里借用官方文档的例子：
 ```js
-//xpl goes here
+console.time("Array initialize");
+var array= new Array(1000000);
+for (var i = array.length - 1; i >= 0; i--) {
+    array[i] = new Object();
+};
+console.timeEnd("Array initialize");
 ```
 >pic goes here
+
+
 
 当然，我们也可以选择自己写代码来计时：
 
 ```js
-//xpl goes here
+var start=new Date().getTime();
+var array= new Array(1000000);
+for (var i = array.length - 1; i >= 0; i--) {
+    array[i] = new Object();
+};
+console.log(new Date().getTime()-start);
 ```
+>pic goes here
+
+
 
 相信你也看到了，用内置的`console.time`是多么地方便，省去了自己写代码来计算的工作量。另外值得一提的是，通过调用内置的`console.time`得到的结果要比自己手动计算的时间差更精确可靠。
 
@@ -146,9 +190,12 @@ console.profile & console.timeLime
 
 所以在我看来这两个方法有点鸡肋，因为都可以通过操作界面来完成。但至少他提供了一种命令行方式的交互，还是多了种姿势供选择吧。
 
+
+
 console.trace
 ---
-堆栈跟踪相关的调试可以使用`console.trace`
+堆栈跟踪相关的调试可以使用`console.trace`。这个同样可以通过UI界面完成。当代码被打断点后，可以在`Call Stack`面板中查看相关堆栈信息。
+>pic goes here
 
 
 上面介绍的都是挂在`window.console`这个对象下面的方法，统称为[Console API](https://developer.chrome.com/devtools/docs/console-api)，接下来的这些方法确切地说应该叫命令，是Chrome内置提供，在控制台中使用的，他们统称为[Command Line API](https://developer.chrome.com/devtools/docs/commandline-api)。
