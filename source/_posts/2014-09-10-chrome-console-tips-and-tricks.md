@@ -18,6 +18,14 @@ Chrome的开发者工具已经强大到没朋友的地步了，特别是其功�
 
 <!-- more -->
 
+console.log
+---
+大家都会用log，但少有人很好地利用`console.error` , `console.warning` 将输出到控制台的信息进行分类整理
+
+console.group
+---
+
+
 Chrome Console 的使用包括两方面，一个是[Console API](https://developer.chrome.com/devtools/docs/console-api)，另一个是[Command Line API](https://developer.chrome.com/devtools/docs/commandline-api.md)。
 
 
@@ -30,8 +38,46 @@ Chrome Console API相当丰富。作为一名前端程序员，我不会以为�
 比如给`hello world` 做件漂亮的嫁衣再拉出来见人：
 
 ```js
-console.log('%c','<><>');
+console.log('%chello world','font-size:25px;color:red;');
 ```
+>output goes here
+
+
+如果你觉得不够过瘾，那就把你能写出来的最华丽的CSS样式都应用上吧，比如渐变：
+
+```js
+console.log('%chello world', 'background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;');
+```
+>output goes here
+
+各种招大招的节奏啊~
+
+看着上面密集的代码不用惊慌，上面`console.log()`第二个参数全是纯CSS用来控制样式的，你不会陌生。
+
+refernce: [Styled console logging in the Chrome DevTools (Canary)](https://plus.google.com/+AddyOsmani/posts/TanDFKEN9Kn)
+
+如果还不够过瘾，那咱们来log一些图片吧，甚至。。。动图？
+对，你得先有图，我们拿[这张图](http://d.pcs.baidu.com/thumbnail/8ecd71e58783e8571b889f9df4c19147?fid=875533066-250528-651695669515765&time=1410400800&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-XWO0nUlvYtrOd3PrKF4E1uanO20%3D&expires=8h&prisign=RK9dhfZlTqV5TuwkO5ihMQzlM241kT2YfffnCZFTaEPwOxHv/XxtwRXLxDSXMBba1Ms9seOiqT9/QffwI8K2Baw0mmLABRQNl51b/oS8+InqoadADmwcyhXydyuW0wDpnC1eeHIg5py5Yk3oaKaHUoLgzh+qonpalNnA+pfMKYDycgI5A4W/Ju5XK/lbx40bb4wELIkwZL96LViffWUbnA0eUoBX2SZbQyj6G5pre1g=&chkv=0&chkbd=0&chkpc=&size=c1366_u768&quality=90)为例。
+
+```js
+console.log("%c", "padding:50px 300px;line-height:120px;background:url('http://d.pcs.baidu.com/thumbnail/8ecd71e58783e8571b889f9df4c19147?fid=875533066-250528-651695669515765&time=1410400800&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-XWO0nUlvYtrOd3PrKF4E1uanO20%3D&expires=8h&prisign=RK9dhfZlTqV5TuwkO5ihMQzlM241kT2YfffnCZFTaEPwOxHv/XxtwRXLxDSXMBba1Ms9seOiqT9/QffwI8K2Baw0mmLABRQNl51b/oS8+InqoadADmwcyhXydyuW0wDpnC1eeHIg5py5Yk3oaKaHUoLgzh+qonpalNnA+pfMKYDycgI5A4W/Ju5XK/lbx40bb4wELIkwZL96LViffWUbnA0eUoBX2SZbQyj6G5pre1g=&chkv=0&chkbd=0&chkpc=&size=c1366_u768&quality=90') no-repeat;");
+```
+>output goes here
+
+看着上面摇摆的豆比兔是不是有种抽它一脸的冲动。
+
+`console.log()` 接收不定参数，参数间用逗号分隔，最终会输出会将它们以空白字符连接。
+
+```js
+console.log('%c你好','color:red;','小明','你知道小红被妈妈打了么');
+```
+>output goes here
+
+第一个参数里可以带用百分号开头的转义指令，如上面输出带样式的文字时使用的`%c`指令。更详细的指令参见官方API文档的[这个表格](https://developer.chrome.com/devtools/docs/console-api#consolelogobject-object)。
+
+
+
+
 
 
 
