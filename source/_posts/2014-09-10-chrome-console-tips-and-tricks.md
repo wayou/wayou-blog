@@ -197,7 +197,7 @@ console.profile & console.timeLime
 当想要查看CPU使用相关的信息时，可以使用`console.profile`配合 `console.profileEnd`来完成这个需求。
 这一功能可以通过UI界面来完成，Chrome 开发者工具里面有个tab便是`Profile`。
 
-与此类似的功能还有`console.timeLine`配合 `console.timeLineEnd`,它的作用是开始记录一段时间轴，同样可以通过Chrome开发者工具里的'Timeline' 标签来进行相应操作。
+与此类似的功能还有`console.timeLine`配合 `console.timeLineEnd`,它的作用是开始记录一段时间轴，同样可以通过Chrome开发者工具里的`Timeline` 标签来进行相应操作。
 
 所以在我看来这两个方法有点鸡肋，因为都可以通过操作界面来完成。但至少他提供了一种命令行方式的交互，还是多了种姿势供选择吧。
 
@@ -225,7 +225,7 @@ $_+1//回车得5
 
 上面的`$_`需要领悟其奥义才能使用得当，而$0~$4则代表了最近5个你选择过的DOM节点。
 什么意思？在页面右击选择`审查元素`，然后在弹出来的DOM结点树上面随便点选，这些被点过的节点会被记录下来，而`$0`会返回最近一次点选的DOM结点，以此类推，$1返回的是上上次点选的DOM节点，最多保存了5个，如果不够5个，则返回`undefined`。
-![]($0.jpg)
+![]($0.gif)
 
 
 
