@@ -41,7 +41,7 @@ console.group("app.foo");
 console.log("来自foo模块的信息 blah blah blah...");
 console.groupEnd();
 console.group("app.bar");
-console.log("来自foo模块的信息 blah blah blah...");
+console.log("来自bar模块的信息 blah blah blah...");
 console.groupEnd();
 ```
 
