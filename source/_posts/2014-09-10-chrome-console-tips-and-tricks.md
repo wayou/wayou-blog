@@ -206,7 +206,6 @@ console.profile & console.timeLime
 console.trace
 ---
 堆栈跟踪相关的调试可以使用`console.trace`。这个同样可以通过UI界面完成。当代码被打断点后，可以在`Call Stack`面板中查看相关堆栈信息。
->pic goes here
 
 
 上面介绍的都是挂在`window.console`这个对象下面的方法，统称为[Console API](https://developer.chrome.com/devtools/docs/console-api)，接下来的这些方法确切地说应该叫命令，是Chrome内置提供，在控制台中使用的，他们统称为[Command Line API](https://developer.chrome.com/devtools/docs/commandline-api)。
