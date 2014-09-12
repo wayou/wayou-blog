@@ -81,7 +81,7 @@ console.log('%chello world', 'background-image:-webkit-gradient( linear, left to
 ```js
 console.log("%c", "padding:50px 300px;line-height:120px;background:url('http://wayou.github.io/2014/09/10/chrome-console-tips-and-tricks/rabbit.gif') no-repeat;");
 ```
-![](5.jpg)
+![](5.gif)
 
 
 
