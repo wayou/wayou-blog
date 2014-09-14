@@ -13,7 +13,7 @@ HTML5有无限可能，总是在释出一些新鲜实用的功能，让原生的
 
 <!-- more -->
 
-具体来说，页面上的`input`还是原来的`input`，只是在它的下面定义一下新的`datalist`,并且在该`input`元素上指定`list`属性。并在其中填充触发提示的文本。一个大概的例子大概是像下面这样：
+具体来说，页面上的`input`还是原来的`input`，只是在它的下面定义一下新的`datalist`在其中填充触发提示的文本,同时在该`input`元素上指定`list`属性指向这个`list`。一个大概的例子大概是像下面这样：
 ```html
 你最喜欢的浏览器是： <input list="browsers">
 <datalist id="browsers">
