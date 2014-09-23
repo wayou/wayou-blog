@@ -7,3 +7,6 @@ tags:
 ---
 
 
+<!-- more -->
+
+### refernce: http://s3.crashworks.org.s3-website-us-east-1.amazonaws.com/if-programming-languages-were-vehicles/
