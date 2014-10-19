@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: </>
+title: 刘哇勇的部落格
 subtitle:
 description:
 author: wayou liu
 email: liuwayong@gmail.com
-language:
+language: zh-CN
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -74,12 +74,13 @@ per_page: 10
 pagination_dir: page
 
 # Disqus
-disqus_shortname: wayou
+# disqus_shortname: wayou
+duoshuo_shortname: wayouliu
 
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: landscape
+theme: material
 exclude_generator:
 
 # Deployment
