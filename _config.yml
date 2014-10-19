@@ -5,7 +5,7 @@
 # Site
 title: 刘哇勇的部落格
 subtitle:
-description:
+description: 
 author: wayou liu
 email: liuwayong@gmail.com
 language: zh-CN
@@ -48,9 +48,9 @@ tag_map:
 ## 2: Enable pagination
 ## 1: Disable pagination
 ## 0: Fully Disable
-archive: 2
-category: 2
-tag: 2
+archive: 1
+category: 1
+tag: 1
 
 # Server
 ## Hexo uses Connect as a server
@@ -80,8 +80,12 @@ duoshuo_shortname: wayouliu
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: material
+theme: hexo-theme-material
 exclude_generator:
+
+feed:
+  type: atom
+  limit: 20
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
