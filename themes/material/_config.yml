@@ -21,16 +21,17 @@ menu:
     url: atom.xml
     intro: "订阅"
     icon: "fa fa-rss"
-  - title: GitHub
-    url: https://github.com/wayou
-    intro: "GitHub"
-    icon: "fa fa-github-alt"
+
 
 links:
-  - title: "source"
+  - title: "GitHub"
     url: http://www.github.com/wayou
     intro: "My Github account."
     icon: "fa fa-github"
+  - title: "博客园"
+    url: http://www.cnblogs.com/Wayou/
+    intro: "博客园"
+    icon: "fa fa-link"
 
 widgets:
 # - search
