@@ -32,6 +32,10 @@ links:
     url: http://www.weibo.com/liuwayong
     intro: "我的微博"
     icon: "fa fa-weibo"
+  - title: "Google Plus"
+    url: https://plus.google.com/u/0/+WayouLiu/posts
+    intro: "我的微博"
+    icon: "fa fa-google-plus-square"
   - title: "博客园"
     url: http://www.cnblogs.com/Wayou/
     intro: "博客园"
