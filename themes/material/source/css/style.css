@@ -51,6 +51,7 @@ body {
   background-repeat: repeat-x;
   background-position: 0 40px;
   /*padding-bottom: 70px;*/
+  font-family: 'Open Sans',"Helvetica Neue", "Helvetica","Microsoft YaHei", "WenQuanYi Micro Hei",Arial, sans-serif;
 }
 
 .content {
