@@ -615,3 +615,12 @@ td {
 .widget-wrapper{
   margin: 15px 0;
 }
+.title a:hover,.title a:focus{
+  text-decoration: none;
+}
+.navbar .navbar-toggle .icon-bar{
+  background-color:#888;
+}
+.tocify{
+  border-radius: 0;
+}
