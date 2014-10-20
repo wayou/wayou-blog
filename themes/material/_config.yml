@@ -28,6 +28,10 @@ links:
     url: http://www.github.com/wayou
     intro: "My Github account."
     icon: "fa fa-github"
+  - title: "微博"
+    url: http://www.weibo.com/liuwayong
+    intro: "我的微博"
+    icon: "fa fa-weibo"
   - title: "博客园"
     url: http://www.cnblogs.com/Wayou/
     intro: "博客园"
