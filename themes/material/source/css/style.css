@@ -325,8 +325,9 @@ img {
   right:30px; 
   border-radius:7px;
   text-decoration:none;  
-  display:none;  
-  background-color:#999999;     
+  font-size: 2.2em;
+  /*display:none;  */
+  /*background-color:#999999;     */
 }
 #gotop span{ 
   display:block; 
@@ -605,11 +606,7 @@ td {
 /*make data, category and tag of a post display in standalone line when on small screen*/
 .post-meta-item{
   display: inline-block;
-}
-
-/*hide pace cirlce progress*/
-.pace-activity{
-  display: none!important;
+  margin-right: 5px;
 }
 
 .widget-wrapper{
