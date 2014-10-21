@@ -621,3 +621,6 @@ td {
 .tocify{
   border-radius: 0;
 }
+.thumbnail{
+  border: none;
+}
