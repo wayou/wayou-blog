@@ -19,13 +19,14 @@ $(function() {
     }
 
     //show back to top btn on none mobile screen
-    $(window).scroll(function() {
-        if ($(this).scrollTop()) {
-            $('#gotop:hidden').stop(true, true).fadeIn();
-        } else {
-            $('#gotop').stop(true, true).fadeOut();
-        }
-    });
+    if (screen.width > 500) {
+        $(window).scroll(function() {
+            if ($(this).scrollTop()) {
+                $('#gotop:hidden').stop(true, true).fadeIn();
+            } else {
+                $('#gotop').stop(true, true).fadeOut();
+            }
+        });
+    }
 
 });
-
