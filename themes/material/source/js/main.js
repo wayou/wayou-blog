@@ -11,9 +11,10 @@ $(function() {
         //sticky the toc
         var $window = $(window),
             $stickyEl = $('#toc'),
-            elTop = $stickyEl.offset().top;
+            elTop;
         $window.scroll(function() {
-            $stickyEl.toggleClass('sticky-scroll', $window.scrollTop() > elTop - 95);
+            elTop = $stickyEl.offset().top;
+            $stickyEl.toggleClass('sticky-scroll', elTop > 155);
         });
     }
 
