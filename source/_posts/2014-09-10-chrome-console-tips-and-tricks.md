@@ -1,10 +1,11 @@
 title: Chrome 控制台不完全指南
-categories: tech
+categories: 技术
 date: 2014-09-10 21:20:04
 tags:
 - chrome
 - console
 - dev-tools
+- 浏览器
 ---
 
 Chrome的开发者工具已经强大到没朋友的地步了，特别是其功能丰富界面友好的console，使用得当可以有如下功效：
@@ -31,7 +32,7 @@ console.info('楼上药不能停！');
 console.warn('楼上嘴太贱！');
 console.error('楼上关你毛事？');
 ```
-![](1.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/1.jpg)
 
 
 
@@ -45,7 +46,7 @@ console.log("来自bar模块的信息 blah blah blah...");
 console.groupEnd();
 ```
 
-![](2.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/2.jpg)
 
 
 而关于`console.log`，早已被玩儿坏了。一切都源于Chrome提供了这么一个API：第一个参数可以包含一些格式化的指令比如`%c`。
@@ -55,7 +56,7 @@ console.groupEnd();
 ```js
 console.log('%chello world','font-size:25px;color:red;');
 ```
-![](3.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/3.jpg)
 
 
 
@@ -65,7 +66,7 @@ console.log('%chello world','font-size:25px;color:red;');
 console.log('%chello world', 'background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;');
 ```
 
-![](4.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/4.jpg)
 
 
 
@@ -81,7 +82,7 @@ console.log('%chello world', 'background-image:-webkit-gradient( linear, left to
 ```js
 console.log("%c", "padding:50px 300px;line-height:120px;background:url('http://wayou.github.io/2014/09/10/chrome-console-tips-and-tricks/rabbit.gif') no-repeat;");
 ```
-![](5.gif)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/5.gif)
 
 
 
@@ -94,7 +95,7 @@ var data = [{'品名': '杜雷斯', '数量': 4}, {'品名': '冈本', '数量':
 console.table(data);
 ```
 
-![](6.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/6.jpg)
 
 
 
@@ -104,7 +105,7 @@ console.table(data);
 ```js
 console.log('%c你好','color:red;','小明','你知道小红被妈妈打了么');
 ```
-![](7.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/7.jpg)
 
 
 
@@ -116,7 +117,7 @@ var isDebug=false;
 console.assert(isDebug,'开发中的log信息。。。');
 ```
 
-![](8.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/8.jpg)
 
 
 
@@ -136,7 +137,7 @@ foo();
 foo();
 ```
 
-![](9.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/9.jpg)
 
 
 
@@ -150,7 +151,7 @@ console.dir(document.body);
 console.log(document.body);
 ```
 
-![](10.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/10.jpg)
 
 
 
@@ -169,7 +170,7 @@ for (var i = array.length - 1; i >= 0; i--) {
 };
 console.timeEnd("Array initialize");
 ```
-![](11.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/11.jpg)
 
 
 
@@ -185,7 +186,7 @@ for (var i = array.length - 1; i >= 0; i--) {
 console.log(new Date().getTime()-start);
 ```
 
-![](12.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/12.jpg)
 
 
 
@@ -219,7 +220,7 @@ $
 $_+1//回车得5
 ```
 
-![](13.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/13.jpg)
 
 
 上面的`$_`需要领悟其奥义才能使用得当，而$0~$4则代表了最近5个你选择过的DOM节点。
@@ -233,7 +234,7 @@ $_+1//回车得5
 $('body')
 ```
 
-![](14.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/14.jpg)
 
 
 $(selector)返回的是满足选择条件的首个DOM元素。
@@ -242,7 +243,7 @@ $(selector)返回的是满足选择条件的首个DOM元素。
 ```js
 $$('div')
 ```
-![](15.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/15.jpg)
 
 
 
@@ -254,7 +255,7 @@ copy(document.body)
 ```
 然后你就可以到处粘了：
 
-![](16.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/16.jpg)
 
 
 看完此条命令行，机智的你是不是跟脑洞全开的我一样，冒出了这样一个想法：那就是通过这个命令可以在JavaScript里进行复制操作从而不用依赖Flash插件了。
@@ -268,7 +269,7 @@ var tboy={name:'wayou',gender:'unknown',hobby:'opposite to the gender'};
 keys(tboy);
 values(tboy);
 ```
-![](17.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/17.jpg)
 
 
 
@@ -286,7 +287,7 @@ sayHello('wayou');
 unmonitor(sayHello);
 sayHello('wayou');
 ```
-![](18.jpg)
+![](/asset/posts/2014-09-10-chrome-console-tips-and-tricks/18.jpg)
 
 
 

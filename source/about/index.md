@@ -1,9 +1,9 @@
-title: About
+title: 关于
 date: 2014-08-24 14:08:46
 layout: about
 ---
-此人很懒，什么也没留下
 
-![chrome lover](index/chrome_incognito.jpg)
+我是大自然的搬运工，拿走不谢。
+
 
 
