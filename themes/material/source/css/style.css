@@ -632,3 +632,7 @@ td {
 .thumbnail{
   border: none;
 }
+
+figure.highlight{
+  margin-bottom: 25px;
+}
