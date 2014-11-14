@@ -7,6 +7,11 @@ tags:
 - 性能
 ---
 
+{% alert info %}
+「注释」作者在本文里没有说明这么一个事实：
+目前的版本`Lo-Dash v2.4.1`并没有引入延迟求值的特性，`Lo-Dash 3.0.0-pre `中部分方法进行了引入，比如`filter()`,`map()`,`reverse()`。
+{% endalert %}
+
 > 原文：[How to Speed Up Lo-Dash ×100? Introducing Lazy Evaluation](http://filimanjaro.com/blog/2014/introducing-lazy-evaluation)
 
 我时常觉得像Lo-Dash这样优秀的库已经无法再优化了。它整合了各种[奇技淫巧](https://www.youtube.com/watch?v=NthmeLEhDDM)已经将JavaScript的性能开发到了极限。它使用了最快速的语句，优化的算法，甚至还会在发版前做性能测试以保证回归没问题。
@@ -70,13 +75,13 @@ var r = _(phoneNumbers).map(String).filter(contains55).take(100);
 
 # 流水线
 
-延迟求值同时带来了另一个好处，我称之为“流水线”。要旨就是不要每次运算后都创建数组，而是所有运算去用后再生成结果数组。下面用代码说话：
+延迟求值同时带来了另一个好处，我称之为“流水线”。要旨就是不避免产生中间数组，而是对一个元素一次性进行完所有操作。下面用代码说话：
 
 ```js
 var result = _(source).map(func1).map(func2).map(func3).value();
 ```
 
-上面看似优雅的写法最终执行其实会被转换成以下原始的样子：
+上面看似优雅的写法在原始的`Lo-Dash`里会转换成下面的样子（直接求值）：
 
 ```js
 var result = [], temp1 = [], temp2 = [], temp3 = [];
