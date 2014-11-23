@@ -16,6 +16,10 @@
 
 <script src="<%- config.root %>js/main.js"></script>
 
+<!-- analytics -->
+<%- partial('post/google_analytics') %> 
+
+
 <% if (config.disqus_shortname){ %>
 <script type="text/javascript">
 var disqus_shortname = '<%= config.disqus_shortname %>';
