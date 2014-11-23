@@ -21,6 +21,6 @@ after_success:
 - rm -rf ./*
 - cp -r ../public/* .
 - git add -A .
-- git commit -m 'Auto Update from TRAVIS-CI'
+- git commit -m 'Auto Update from TRAVIS-CI {{ now(\'YYYY-MM-DD HH:mm:ss\') }}'
 - git branch -m master
 - git push -q $DEPLOY_REPO HEAD:master
