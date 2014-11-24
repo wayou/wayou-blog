@@ -1,5 +1,5 @@
 title: 自定义Sublime Text的图标
-categories: 瞎折腾
+categories: 未分类
 date: 2014-08-31 11:56:00
 tags:
 - 技巧
