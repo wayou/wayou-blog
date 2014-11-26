@@ -1,4 +1,4 @@
-title: javascript benchmarking
+title: JavaScript的基准测试-不服跑个分？
 toc: true
 categories: 技术
 date: 2014-11-26 19:54:36
