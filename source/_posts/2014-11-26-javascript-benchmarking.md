@@ -40,11 +40,11 @@ totalTime = new Date - start;
 
  方案A被用于[SlickSpeed](https://github.com/kamicane/slickspeed/), [Taskspeed](https://github.com/phiggins42/taskspeed), [SunSpider](http://www2.webkit.org/perf/sunspider/sunspider.html), 和 [Kraken](http://krakenbenchmark.mozilla.org/)这些流行的基准测试库中。
 
- ## 缺撼
+## 缺撼
 
  鉴于现在的设备和浏览器运行得越来越快，这种将代码运行固定次数的测试方法有很大概念会得到一个0ms的时间差结果，显然0是毫无意义的。
 
- ## 方案B
+## 方案B
 
 另一种方案是计算固定时间内进行了多少运算量。较之前的做法，这回你不用指定一个固定的循环次数了。
 
