@@ -13,7 +13,7 @@ tags:
 
 <!-- more -->
 
-这是为何我创建了[jsPerf](http://jsperf.com/)的一个原因，一个你可以轻松创建并分享各种库对比结果的简单工具。用起来非常省事，只需把想要测试的代码录入然后jsPerf会为你创建好可以跨平台跑起来的测试用例。
+这是为何我创建了[jsPerf](http://jsperf.com/)的一个原因，一个你可以轻松创建并分享各种代码片段对比结果的简单工具。用起来非常省事，只需把想要测试的代码录入然后jsPerf会为你创建好可以跨平台跑起来的测试用例。
 
 内部实现上，最开始jsPerf用的是一个基于[JSLitmus](http://www.broofa.com/Tools/JSLitmus/)的基准测试库，我将它称作[Benchmark.js](http://benchmarkjs.com/)。后续又往里面添加了更多的特性，最近，[John-David Dalton](http://allyoucanleet.com/)干脆将这个库彻底重写了一遍。所以现在Benchmark.js已经比之前好很多了。
 
