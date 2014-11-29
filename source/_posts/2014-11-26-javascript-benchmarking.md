@@ -9,7 +9,7 @@ tags:
 ---
 >原文：[Bulletproof JavaScript benchmarks](https://mathiasbynens.be/notes/javascript-benchmarking)
 
-做JavaScript的基准测试并没有想的那么简单。即使不考虑浏览器差异所带来的影响，也有很多难点-或者说陷阱需要面对。
+做JavaScript的基准测试并没有想的那么简单。即使不考虑浏览器差异所带来的影响，也有很多难点——或者说陷阱需要面对。
 
 <!-- more -->
 
