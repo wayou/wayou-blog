@@ -78,3 +78,19 @@ HTML5 中新增的`<details>`标签允许用户创建一个可展开折叠的元
 
 ![can i use details tag](/asset/posts/2014-11-30-html5-details-tag/browser_compatability.jpg)
 
+# Polyfill
+
+既然支持情况如此不理解，那么使用垫片（polyfill）就很有必要了。
+
+垫片就是在那些不支持此特性的浏览器上使用JavaScript来手动模拟，看起来好像是浏览器支持了一样。
+
+[chemerisuk](http://www.smashingmagazine.com/author/maksim-chemerisuk/?rel=author)给出了他的一个实现，源码在GitHub上](https://github.com/chemerisuk/better-
+[details-polyfill)，具体的实现思路也写成了博文发到了[Smashing Magazine](http://www.smashingmagazine.com/2014/11/28/complete-polyfill-html5-details-element/)，用法可参见GitHub。
+
+
+# 参考
+
+- [HTML <details> Tag](http://www.w3schools.com/tags/tag_details.asp)
+- [HTML <dt> Tag](http://www.w3schools.com/tags/tag_dt.asp)
+- [Making A Complete Polyfill For The HTML5 Details Element](http://www.smashingmagazine.com/2014/11/28/complete-polyfill-html5-details-element/)
+- [better-details-polyfill](https://github.com/chemerisuk/better-details-polyfill)
