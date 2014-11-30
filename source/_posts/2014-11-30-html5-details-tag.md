@@ -90,7 +90,7 @@ HTML5 中新增的`<details>`标签允许用户创建一个可展开折叠的元
 
 # 参考
 
-- [HTML <details> Tag](http://www.w3schools.com/tags/tag_details.asp)
-- [HTML <dt> Tag](http://www.w3schools.com/tags/tag_dt.asp)
+- [HTML &lt;details&gt; Tag](http://www.w3schools.com/tags/tag_details.asp)
+- [HTML &lt;dt&gt; Tag](http://www.w3schools.com/tags/tag_dt.asp)
 - [Making A Complete Polyfill For The HTML5 Details Element](http://www.smashingmagazine.com/2014/11/28/complete-polyfill-html5-details-element/)
 - [better-details-polyfill](https://github.com/chemerisuk/better-details-polyfill)
