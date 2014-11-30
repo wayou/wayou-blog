@@ -84,7 +84,7 @@ HTML5 中新增的`<details>`标签允许用户创建一个可展开折叠的元
 
 垫片就是在那些不支持此特性的浏览器上使用JavaScript来手动模拟，看起来好像是浏览器支持了一样。
 
-[chemerisuk](http://www.smashingmagazine.com/author/maksim-chemerisuk/?rel=author)给出了他的一个实现，源码在GitHub上](https://github.com/chemerisuk/better-
+[chemerisuk](http://www.smashingmagazine.com/author/maksim-chemerisuk/?rel=author)给出了他的一个实现，源码在[GitHub上](https://github.com/chemerisuk/better-
 [details-polyfill)，具体的实现思路也写成了博文发到了[Smashing Magazine](http://www.smashingmagazine.com/2014/11/28/complete-polyfill-html5-details-element/)，用法可参见GitHub。
 
 
