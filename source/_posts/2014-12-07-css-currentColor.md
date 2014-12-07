@@ -142,7 +142,7 @@ p{
 
 看下面这个例子（这个示例灵感来自[这里](http://osvaldas.info/keeping-css-short-with-currentcolor)）
 
-![situation3](/asset/posts/2014-12-07-css-currentColor/btn_with_svg_st.jpg)
+![btn_with_svg_st](/asset/posts/2014-12-07-css-currentColor/btn_with_svg_st.jpg)
 
 我们在按钮中使用了一个svg图标。你是一个负责任的FE，所以，对这个按钮的各种状态`:focus`，`:hover`，`:active`都作了样式上的处理。同时，为了让图标也跟着保持一致的姿态变更，需要把对`<a>`标签的样式处理同样就到到`<svg>`标签上。于是你的CSS代码看起来就是下面这样的了。
 
@@ -214,11 +214,11 @@ p{
 
 一提到浏览器兼容性，FE同学们或许就不敢那么任性了。之前你可能是这样的：
 
-![situation3](/asset/posts/2014-12-07-css-currentColor/before.gif)
+![before](/asset/posts/2014-12-07-css-currentColor/before.gif)
 
 当听到IE传来的噩耗，你可能是这样的：
 
-![situation3](/asset/posts/2014-12-07-css-currentColor/after.gif)
+![after](/asset/posts/2014-12-07-css-currentColor/after.gif)
 
 经查，[can i use](http://caniuse.com/#search=currentcolor) 没有关于它的数据。
 
