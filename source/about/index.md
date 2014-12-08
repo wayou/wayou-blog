@@ -9,5 +9,7 @@ layout: about
 
 {% textcolor success %}谷歌控。{% endtextcolor %}
 
+美图看多会眼瞎！
+
 
 
