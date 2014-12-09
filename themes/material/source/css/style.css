@@ -502,6 +502,12 @@ h4 {
   padding: 5px 20px;
 }
 
+li.tocify-item.list-group-item{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* =============================================================================
    Codes
    ========================================================================== */
