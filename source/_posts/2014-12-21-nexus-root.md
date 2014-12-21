@@ -157,7 +157,7 @@ Nexus5 自带Android 4.4.3其实可以接收OTA自动升级到最新版本的。
 如果顺利的话，到此你的手机就ROOT成功并且数据还原完毕啦！
 
 
-# 手动升级Android Lollipop 5.0.1
+# 手动升级Android Lollipop
 
 如果之前是Android 4.x，建议先升5再升5.0.1。升级系统不必ROOT，但至少官方有如下提示：
 > 4. If necessary, unlock the device's bootloader by running:
@@ -208,7 +208,7 @@ Nexus5 自带Android 4.4.3其实可以接收OTA自动升级到最新版本的。
 开始手动写入。
 
 - 执行`fastboot flash bootloader bootloader-hammerhead-hhz12d.img` 这里的`bootloader-hammerhead-hhz12d.img` 文件名以你自己的为准，不同系统可能有不同
-- 执行`fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.22.img` 这里的`bootloader-hammerhead-hhz12d.img` 
+- 执行`fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.22.img`
 - 执行`fastboot reboot-bootloader` 重启
 - 再依次执行
 ```bash
