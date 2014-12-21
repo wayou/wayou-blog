@@ -7,9 +7,15 @@ layout: about
 
 伪极客一枚。
 
-{% textcolor success %}谷歌控。{% endtextcolor %}
+{% textcolor success %}谷歌死忠。{% endtextcolor %}
 
 美图看多会眼瞎！
+
+IT重度症患者
+
+没日夜码狂
+
+GitHub 狗，不刷streak不舒服斯基-.-
 
 
 
