@@ -13,11 +13,13 @@ tags:
 
 由「[钢的琴](http://movie.douban.com/subject/4876722/)」网友脑洞大开延伸出了吉的他二的胡琵的琶，以及后来许嵩的「[苏格拉没有底](http://music.douban.com/subject/6033105/)」，是否可以再拓展一下，得到哥本不爱吃哈根，哈根爱达斯等剧情乱入的关系。
 
+上面跟本文要讨论的主题有什么关系？
+
+没关系。
+
 # 缘起
 
-有用户反馈内部MIS系统慢，页面加载耗时长。之前时有人提，但问题难定位，无线索，前后端也没发现明显的代码缺陷，所以每次都无果，停留在吐槽的层面。
-
-前端同学们开组会提及此事，如何解决慢的问题。
+有用户反馈内部MIS系统慢，页面加载耗时长。前端同学们开组会提及此事，如何解决慢的问题。
 
 最致命的是：偶发!你不能准确知道它抽风的时间点，无法在想要追查问题的时候必现它。
 这只是一方面，另外，慢的可能实在太多了，那么问题来了，是前端导致的还是后端的问题？
@@ -502,12 +504,12 @@ t=1728 [st=172] -REQUEST_ALIVE
 
 ![](/asset/posts/2014-12-31-chrome-request-stalled-problem/3retry.jpg)
 
-与正常相比，前面最后一次发送和请求无异常，时间就多在了前面还有再次发送和请求的过程，细看时间都花在了以下两个事件中：
+与正常相比，最后一次发送请求和读取响应头无异常，时间就多在了前面还有再次发送和请求的过程，细看时间都花在了以下两个事件中：
 
 - `HTTP_STREAM_PARSER_READ_HEADERS  [dt=21301]`
 - `HTTP_STREAM_PARSER_READ_HEADERS  [dt=21304]`
 
-该事件的名称已经自和解读，就是解析读取的响应头。但问题是接着下面就报错了，
+该事件的名称已经自我解读，意思是解析读取的响应头。但问题是紧接着下面报错了，
 
 ```text
 --> net_error = -101 (ERR_CONNECTION_RESET)
@@ -520,9 +522,7 @@ t=1728 [st=172] -REQUEST_ALIVE
 
 那么到这里，我似乎有理由相信，问题不是前端代码造成的了。前端的追查可以结束了。但有种怀疑，发生错误时，请求真的发出去了么。毕竟上面日志显示，第一次发送请求的事件中：
 
-`+HTTP_STREAM_REQUEST  [dt=2]` 这里才2毫秒，接下来的`+HTTP_TRANSACTION_SEND_REQUEST  [dt=0]`甚至只花费了0毫秒! 请解释。
-
-要求证，我们只能继续往下。那么接下来的工作就是对`ERR_CONNECTION_RESET`这个错误的追查了。
+那么接下来的工作就是对`ERR_CONNECTION_RESET`这个错误的追查了。
 
 # 官方关于 `ERR_CONNECTION_RESET` 错误的解释
 
@@ -553,10 +553,13 @@ bool ShouldTryReadingOnUploadError(int error_code) {
 }
 ```
 
-这里定义了一个`ShouldTryReadingOnUploadError` 的方法，注释耐人寻味，这个时候，这样的情景，能否正确解读注释成为了比读懂代码更重要（这是我在看JS代码时永远无法体味到的感觉）：
+这里定义了一个`ShouldTryReadingOnUploadError` 的方法，注释耐人寻味，这个时候，这样的情景，能否正确解读注释成为了比读懂代码更重要（这是我在看JS代码时永远无法体味到的感觉），下面尽可能对它进行理解：
 
+> 在尝试发送一个请求体的时候，让服务器尝试发送一个带错误的响应体，如果我们接收到了该错误则返回`true`
 
-同时，另外一个文件，`src/net/base/net_errors_win.cc` 观察其路径和代码得知其中多为系统级别的错误，似乎跟我们的问题不是很关联，忽略该文件。
+我承认被上面的复杂从句打败！
+
+那么我们来看这个方法被调用的场景。
 
 现在我们点击上面的`ShouldTryReadingOnUploadError`方法，代码下方出现调用了该方法的地方，一共有两处。
 
@@ -564,7 +567,7 @@ bool ShouldTryReadingOnUploadError(int error_code) {
 
 分别点击进行查看。
 
-```cpp 459行HttpStreamParser方法里进行了调用
+```cpp 459行DoSendHeadersComplete方法里进行了调用
 int HttpStreamParser::DoSendHeadersComplete(int result) {
   if (result < 0) {
     // In the unlikely case that the headers and body were merged, all the
@@ -579,8 +582,10 @@ int HttpStreamParser::DoSendHeadersComplete(int result) {
     return result;
   }
 ```
+> 虽然不太可能，但也不排除头部和请求体合并的情况，当所有头部发送完毕，请求体不一定，此时`result`便是需要稍后处理的一种错误，这里暂且先返回`OK`。
 
-```cpp 516行另一个HttpStreamParser方法里进行了调用
+
+```cpp 516行另一个DoSendBodyComplete方法里进行了调用
 int HttpStreamParser::DoSendBodyComplete(int result) {
   if (result < 0) {
     // If |result| is an error that this should try reading after, stash the
@@ -593,6 +598,16 @@ int HttpStreamParser::DoSendBodyComplete(int result) {
   }
 ```
 
+> 跟上面类似，如果`result`出错，稍后处理，先返回正常
+
+这也与我们在日志中看到的情况相符，在前面再次错误后，这次请求并没有终止结束，而是尝试到了第三次并且以成功结束的。
+
+但不管怎样，从这两个方法，一个`DoSendHeadersComplete`， 另一个`DoSendBodyComplete`，身上能体现出请求确实已经发出去。
+
+请求已经发出去了，那问题就不是前端的了。结论似乎就明朗了。
+
+同时，另外一个文件，`src/net/base/net_errors_win.cc` 观察其路径和代码得知其中多为系统级别的错误，似乎跟我们的问题不是很关联，忽略该文件。
+
 
 # Chrome Dev Tool 中时间线各阶段代表的意义
 
@@ -602,33 +617,42 @@ int HttpStreamParser::DoSendBodyComplete(int result) {
 ![](/asset/posts/2014-12-31-chrome-request-stalled-problem/timing.png)
 
 ## Stalled/Blocking
-Time the request spent waiting before it could be sent. This time is inclusive of any time spent in proxy negotiation. Additionally, this time will include when the browser is waiting for an already established connection to become available for re-use, obeying Chrome's maximum six TCP connection per origin rule.
+
+在请求能够被发出去前的等等时间。包含了用于处理代理的时间。另外，如果有已经建立好的连接，那么这个时间还包括等待已建立连接被复用的时间，这个遵循Chrome对同一源最大6个TCP连接的规则。
+
+「拿我们的情况来说，上面出错所有的耗时也是算在了这部分里面。网络面板中显示的其余时间比如DNS查找，连接建立等都是属于最后那次成功请求的了」
 
 ## Proxy Negotiation
-Time spent negotiating with a proxy server connection.
+处理代理的时间。
 
 ## DNS Lookup
-Time spent performing the DNS lookup. Every new domain on a page requires a full roundtrip to do the DNS lookup.
+
+查找DNS的时间。页面上每个新的域都需要一次完整的寻路来完成DNS查找。
 
 ## Initial Connection / Connecting
-Time it took to establish a connection, including TCP handshakes/retries and negotiating a SSL.
+用于建立链接的时间，包括TCP握手及多次尝试握手，还有处理SSL。
 
 ## SSL
-Time spent completing a SSL handshake.
+
+完成SSL握手的时间。
 
 ## Request Sent / Sending
 Time spent issuing the network request. Typically a fraction of a millisecond.
 
+发起请求的时间，通常小到可以忽略。
+
 ## Waiting (TTFB)
-Time spent waiting for the initial response, also known as the Time To First Byte. This time captures the latency of a round trip to the server in addition to the time spent waiting for the server to deliver the response.
+
+等待响应的时间，具体来说是等待返回首个字节的时间。包含了与服务器之间一个来回响应的时间和等待首个字节被返回的时间。
 
 ## Content Download / Downloading
-Time spent receiving the response data.
 
+用于下载响应的时间
 
 # 结论
 
-我相信很多同学是直接跳到这里来了的。事实上这里我给不出什么解决方案，请RD同学接着排查。
+我相信很多同学是直接跳到这里来了的。
+事实上这里我给不出什么解决方案，只能证明前端代码没有问题，请求已发。请RD同学接着排查。
 
 # 参考及引用
 
