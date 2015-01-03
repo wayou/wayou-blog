@@ -538,11 +538,15 @@ t=1728 [st=172] -REQUEST_ALIVE
 
 那么这个错误究竟是什么。能不能找到点靠谱的解释。当然能，让我们进入到Chromium的源码中去。
 
+## ERR_CONNECTION_RESET被唤起的地方
+
 在Chromium的源码中搜索该常量名，确实出现很多[结果](https://code.google.com/p/chromium/codesearch#search/&q=ERR_CONNECTION_RESET&sq=package:chromium&type=cs)。联系到我们查看日志发现问题的上下文，是在解析响应头报的。所以我们定位到`http_stream_parser.cc`文件，同时注意到有一个文件叫`net_errors_win.cc`，所以猜测他是定义所有错误常量用的，也顺便打开之。
+
+经过观察`src/net/base/net_errors_win.cc` 其路径和代码得知其中多为系统级别的错误，似乎跟我们的问题不是很关联，忽略该文件。
 
 ![](/asset/posts/2014-12-31-chrome-request-stalled-problem/source.jpg)
 
-首先`http_stream_parser.cc`文件中，`ERR_CONNECTION_RESET`仅出现一次。这给我们定位带来了极大的便利。
+`http_stream_parser.cc`文件中，`ERR_CONNECTION_RESET`仅出现一次。这给我们定位带来了极大的便利。
 
 ```cpp [chromium]//src/net/base/net_errors_win.cc https://code.google.com/p/chromium/codesearch#chromium/src/net/http/http_stream_parser.cc&q=ERR_CONNECTION_RESET&sq=package:chromium&dr=C http_stream_parser.cc
 // Returns true if |error_code| is an error for which we give the server a
@@ -604,9 +608,65 @@ int HttpStreamParser::DoSendBodyComplete(int result) {
 
 但不管怎样，从这两个方法，一个`DoSendHeadersComplete`， 另一个`DoSendBodyComplete`，身上能体现出请求确实已经发出去。
 
-请求已经发出去了，那问题就不是前端的了。结论似乎就明朗了。
+## TCP RST
 
-同时，另外一个文件，`src/net/base/net_errors_win.cc` 观察其路径和代码得知其中多为系统级别的错误，似乎跟我们的问题不是很关联，忽略该文件。
+另外，在[`net_error_list.h`](https://code.google.com/p/chromium/codesearch#chromium/src/net/base/net_error_list.h)这个文件的109行，可以准确找到我们在日志中得到的101号错误。它的定义如下：
+
+```cpp
+// A connection was reset (corresponding to a TCP RST).
+NET_ERROR(CONNECTION_RESET, -101)
+```
+从括号中的进一步解释可以知道，它代表TCP连接重置。
+
+那么问题来了，什么是TCP连接重置？什么会引发TCP连接重置。从[这篇文章](http://blogs.technet.com/b/networking/archive/2009/08/12/where-do-resets-come-from-no-the-stork-does-not-bring-them.aspx)中有比较详细的解答。
+
+想要完全解释，本文似乎是不可能的了。但根据上面的文章，这里可以简单转述一下。
+
+## 什么是TCP连接
+
+它是一种协议。当网络上一个节点想与另一个节点通信时，双方需要选建立连接。而这个连接过程需要大家都懂的一种约定，TCP就是事先定好的一种约定，于是我们采用它吧，于是其中一个节点按照这个约定发起一建立连接的请求，另一节点收到后，根据该约定，便能读懂这个请求里各字段的意思：哦，丫这是想约我呢。
+
+## 三次握手
+
+继续上面的例子。A想与B通信，并且使用TCP。
+
+首先A发起一个报文，其中包含自己的地址，想要连接的目标地址，自己用来连接的端口及目标机器的端口,etc.
+
+B收到邀约，并且愿意付约。此刻B需要回传一个报文，告诉A我愿意跟你连接。
+
+A收到B的肯定应答，到此A与B经历了三次通信或者说是握手，双方都没有异议，连接建立。
+
+而连接断开的过程也颇为类似。双方中的一方比如说A先发起一个断开连接的报文FIN，B收到并确认，然后回传一个可以断开的报文FIN给A。此刻A收到并确认。此刻双方都确认后，连接可以安全断开，但还会保持一个等待断开的状态，大概持续4分钟，用于之前连接通路上未传输完成的数据进行善后。
+
+## 什么是重置
+
+上面提到了4分钟的等待时间，而重置RESET便是立即断开连接的手段。
+
+## 发生重置的情况
+
+到此重置的作用已然明了。也就是说，重置甚至算不上一个错误，它是TCP连接中的一种正常情况。但什么时候会发生重置，如何引起的。
+
+上文列出了三种情况。
+
+### SMB Reset
+
+简单举例来说，服务器提供了两个端口445，139进行服务，客户端同时去请求与这两个端口连接，服务器返回了两个端口可以被连接，此刻客户端择优选择一个进行连接，而重置另一个。
+
+### Ack, Reset
+
+报文重置发生主要有以下情况：
+- 服务器没有监听被请求的端口，无法建立连接
+- 服务器此刻无法比如没有充裕的资源用来连接连接
+
+### TCP Reset due to no response
+
+由于没有响应而被重置。当发起连接的一方连续发送6次请求未得到回应，此刻默认他们之间已经通过三次握手建立了连接并且通信有问题，发起的一方将连接重置。
+
+### Application Reset
+
+除了上面的情况，找不到TCP内部自己发送的重置，则归为了这一类。程序内将连接重置。此种情况包含了所有你想得到想不到将连接断开的情况。有可能是程序内部逻辑重置的，所以不能完全认为此时发生了错误。
+
+值得注意的是，上面列出的情况服务器的不确定性导致连接重置的可能性要合理些。而Chrome不应该在发起URL请求时主动重置连接，这非常不科学。
 
 
 # Chrome Dev Tool 中时间线各阶段代表的意义
@@ -652,7 +712,7 @@ Time spent issuing the network request. Typically a fraction of a millisecond.
 # 结论
 
 我相信很多同学是直接跳到这里来了的。
-事实上这里我给不出什么解决方案，只能证明前端代码没有问题，请求已发。请RD同学接着排查。
+事实上我给不出什么解决方案，只能证明前端代码没有问题，请求已发。请RD同学接着排查。
 
 # 参考及引用
 
@@ -668,6 +728,7 @@ Time spent issuing the network request. Typically a fraction of a millisecond.
 \#10 [从FE的角度上再看输入url后都发生了什么](http://div.io/topic/609?page=1#2050)
 \#11 [ERR_CONNECTION_RESET 的Chromium 源码](https://code.google.com/p/chromium/codesearch#chromium/src/net/http/http_stream_parser.cc&q=ERR_CONNECTION_RESET&sq=package:chromium&dr=C&l=77)
 \#12 [Chromium Network Stack](http://www.chromium.org/developers/design-documents/network-stack#TOC-HttpStreamFactory)
+\#13 [Where do resets come from? (No, the stork does not bring them.)](http://blogs.technet.com/b/networking/archive/2009/08/12/where-do-resets-come-from-no-the-stork-does-not-bring-them.aspx)
 
 
 # 撒码
