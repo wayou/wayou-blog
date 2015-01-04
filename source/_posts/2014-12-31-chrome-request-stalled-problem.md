@@ -616,6 +616,8 @@ NET_ERROR(CONNECTION_RESET, -101)
 ```
 从括号中的进一步解释可以知道，它代表TCP连接重置。
 
+# TCP
+
 那么问题来了，什么是TCP连接重置？什么会引发TCP连接重置。从[这篇文章](http://blogs.technet.com/b/networking/archive/2009/08/12/where-do-resets-come-from-no-the-stork-does-not-bring-them.aspx)中有比较详细的解答。
 
 想要完全解释，本文似乎是不可能的了。但根据上面的文章，这里可以简单转述一下。
@@ -664,7 +666,7 @@ A收到B的肯定应答，到此A与B经历了三次通信或者说是握手，�
 
 除了上面的情况，找不到TCP内部自己发送的重置，则归为了这一类。程序内将连接重置。此种情况包含了所有你想得到想不到将连接断开的情况。有可能是程序内部逻辑重置的，所以不能完全认为此时发生了错误。
 
-值得注意的是，上面列出的情况服务器的不确定性导致连接重置的可能性要合理些。而Chrome不应该在发起URL请求时主动重置连接，这非常不科学。
+值得注意的是，上面列出的情况服务器的不确定性导致连接重置的可能性要合理些。Chrome 主动发起URL请求不太可能自己又重置掉，并且没有理由重置掉后又去重连。
 
 
 # Chrome Dev Tool 中时间线各阶段代表的意义
@@ -709,8 +711,7 @@ Time spent issuing the network request. Typically a fraction of a millisecond.
 
 # 结论
 
-我相信很多同学是直接跳到这里来了的。
-事实上我给不出什么解决方案，只能证明前端代码没有问题，请求已发。请RD同学接着排查。
+我相信很多同学是直接跳到这里来了的。事实上我给不出什么解决方案，只能证明前端代码没有问题，请求已发。请RD同学接着排查。
 
 # 参考及引用
 
@@ -728,16 +729,4 @@ Time spent issuing the network request. Typically a fraction of a millisecond.
 \#12 [Chromium Network Stack](http://www.chromium.org/developers/design-documents/network-stack#TOC-HttpStreamFactory)
 \#13 [Where do resets come from? (No, the stork does not bring them.)](http://blogs.technet.com/b/networking/archive/2009/08/12/where-do-resets-come-from-no-the-stork-does-not-bring-them.aspx)
 
-
-# 撒码
-
-Berg大神怄心之作，前端高质量社区[DIV.IO](http://div.io/) 邀请码随手撒：
-
-> KD4M-OZ9B-KWVR-K01T
-> JFRB-SDMB-JY3H-EXGA
-> L7CP-WQX9-ETVX-R9XR
-> MM2S-XUSK-IJAT-9O71
-> YDEJ-DZ2M-MFCV-INOM
-
-老规矩，拿码请报到，熟读版规很重要。
 
