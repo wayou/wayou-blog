@@ -61,6 +61,7 @@ body {
   margin-left: 2px;
   font-size: 0.8em;
   vertical-align: top;
+  word-break: break-all;
 }
 
 .content {
