@@ -13,9 +13,7 @@ layout: about
 
 IT重度症患者
 
-没日夜码狂
-
-GitHub 狗，不刷streak不舒服斯基-.-
+GitHub挂机党，不刷{% textcolor success %}streak{% endtextcolor %}不舒服斯基-.-
 
 
 
