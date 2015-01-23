@@ -34,4 +34,7 @@ $(function() {
         });
     }
 
+    // make embeded video responsive
+    $(".row.post").fitVids({ customSelector: "iframe[src^='http://player.youku.com']"});
+
 });
