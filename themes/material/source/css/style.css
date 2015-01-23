@@ -56,6 +56,13 @@ body {
   -webkit-text-stroke-width: 0.1px;
 }
 
+/*fix long title display problem on mobile*/
+@media screen and (max-width:415px) {
+ body{
+  word-break: break-all;
+ }
+}
+
 /*add icon for post link*/
 .mypage p a:not(.fancybox):after{
   content: "\f08e";
