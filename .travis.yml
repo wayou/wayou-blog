@@ -13,4 +13,4 @@ before_script:
 - git config --global user.name 'wayou'
 - git config --global user.email 'liuwayong@gmail.com'
 script:
-- hexo od
+- hexo o -d
