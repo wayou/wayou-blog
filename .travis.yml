@@ -6,7 +6,7 @@ branches:
   only:
   - master
 before_install:
-- npm install -g hexo
+- npm install -g hexo@2.8.3
 install:
 - npm i
 before_script:
