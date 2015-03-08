@@ -13,14 +13,4 @@ before_script:
 - git config --global user.name 'wayou'
 - git config --global user.email 'liuwayong@gmail.com'
 script:
-- hexo o
-after_success:
-- mkdir .deploy
-- cd .deploy
-- git clone --depth 1 --branch master --single-branch $DEPLOY_REPO . || (git init && git remote add -t master origin $DEPLOY_REPO)
-- rm -rf ./*
-- cp -r ../public/* .
-- git add -A .
-- git commit -m 'Auto Update from TRAVIS-CI'
-- git branch -m master
-- git push -q $DEPLOY_REPO HEAD:master
+- hexo od
