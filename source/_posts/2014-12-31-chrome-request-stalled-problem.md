@@ -744,7 +744,7 @@ Time spent issuing the network request. Typically a fraction of a millisecond.
 - 请求成功构造，排除前端代码层面导致问题的原因，是不是浏览器Bug有待确定
 - 可以肯定的是在与服务器建立连接时被Shut down了，参考上面关于连接重置的部分会更有意义一些
 
-{% textcolor primary %}01/13日更新：参见上面进一步解读日志文件部分。{% endtextcolor %}
+> 01/13日更新：参见上面进一步解读日志文件部分。
 
 
 # 参考及引用
