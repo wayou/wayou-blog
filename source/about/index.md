@@ -7,13 +7,13 @@ layout: about
 
 伪极客一枚。
 
-{% textcolor success %}谷歌死忠。{% endtextcolor %}
+谷歌死忠
 
 美图看多会眼瞎！
 
 IT重度症患者
 
-GitHub挂机党，不刷{% textcolor success %}streak{% endtextcolor %}不舒服斯基-.-
+GitHub挂机党，不刷streak不舒服斯基-.-
 
 
 

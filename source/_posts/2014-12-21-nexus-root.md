@@ -6,8 +6,9 @@ tags:
 - nexus
 - android
 ---
-刷机有风险，root需谨慎！
-following steps below on your own risk
+
+> 刷机有风险，root需谨慎！
+> following steps below on your own risk
 
 <!-- more -->
 
