@@ -6,10 +6,8 @@ tags:
 - nexus
 - android
 ---
-{% alert danger %}
 刷机有风险，root需谨慎！
 following steps below on your own risk
-{% endalert %}
 
 <!-- more -->
 
