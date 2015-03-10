@@ -13,7 +13,7 @@ before_script:
 - git config --global user.name 'wayou'
 - git config --global user.email 'liuwayong@gmail.com'
 script:
-- hexo o
+- hexo g
 after_success:
 - mkdir .deploy
 - cd .deploy
